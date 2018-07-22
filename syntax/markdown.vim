@@ -103,23 +103,25 @@ syn region mkdCode         start="<pre[^>]*\\\@<!>"        end="</pre>"
 syn region mkdCode         start="<code[^>]*\\\@<!>"       end="</code>"
 syn region mkdFootnote     start="\[^"                     end="\]"
 
-" TODO Strictly speaking, in list item, An indented code block will have to be
-" indented four spaces or more beyond the edge of the region where text will
-" be included in the list item. 
-" If there's only a single line before indented code block, I don't know how
-" to get the correct amount of indentation using regexp only.
-" For now, I'll just assume ordered list marker `NN.` always takes 2 spaces.
-"
-" Code block after a non-list-item start line. starts with previous line's
-" indentation + 4 or more spaces. skip samely indented lines and empty lines. 
-" ends at first line that is not indented as deeply as the code block.
-syn match mkdCode         /^\(\s*\)\%([-*+] \|\d\. \)\@!\S.*\zs\n\_^\s*\n\%(\_^\1\s\{4,}\S.*\n\|\_^\s*\n\)\+/me=e-1
-" code block belonging to unordered list item line
-syn match mkdCode         /^\(\s*\)[-*+]\(\s*\)\S.*\zs\n\_^\s*\n\%(\_^\1\2\s\{5,}\S.*\n\|\_^\s*\n\)\+/me=e-1 contained
-" code block belonging to ordered list item line
-syn match mkdCode         /^\(\s*\)\d\+\.\(\s*\)\S.*\zs\n\_^\s*\n\%(\_^\1\2\s\{6,}\S.*\n\|\_^\s*\n\)\+/me=e-1 contained
-" code block at the beginning of file. allowing empty lines in code block
-syn match mkdCode         /\%^\(^\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\|^\s*\n\)\+/me=e-1
+"" TODO WTF..................................................................
+"" Strictly speaking, in list item, An indented code block will have to be
+"" indented four spaces or more beyond the edge of the region where text will
+"" be included in the list item. 
+"" If there's only a single line before indented code block, I don't know how
+"" to get the correct amount of indentation using regexp only.
+"" For now, I'll just assume ordered list marker `NN.` always takes 2 spaces.
+"" 
+"" Code block after a non-list-item start line. starts with previous line's
+"" indentation + 4 or more spaces. skip samely indented lines and empty lines. 
+"" ends at first line that is not indented as deeply as the code block.
+"syn match mkdCode         /^\(\s*\)\%([-*+] \|\d\+\. \)\@!\S.*\zs\n\_^\s*\n\%(\_^\1\s\{4,}\S.*\n\|\_^\s*\n\)\+/me=e-1 contained
+"" code block belonging to unordered list item line
+"syn match mkdCode         /^\(\s*\)[-*+]\(\s*\)\S.*\zs\n\_^\s*\n\%(\_^\1\2\s\{5,}\S.*\n\|\_^\s*\n\)\+/me=e-1 contained
+"" code block belonging to ordered list item line
+"syn match mkdCode         /^\(\s*\)\d\+\.\(\s*\)\S.*\zs\n\_^\s*\n\%(\_^\1\2\s\{6,}\S.*\n\|\_^\s*\n\)\+/me=e-1 contained
+"" code block at the beginning of file. allowing empty lines in code block
+"syn match mkdCode         /\%^\(^\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\|^\s*\n\)\+/me=e-1
+"" TODO WTF..................................................................
 
 syn match  mkdListItem     /^\s*\%([-*+]\|\d\+\.\)\ze\s\+/ contained
 syn region mkdListItemLine start="^\s*\%([-*+]\|\d\+\.\)\s\+" end="$" oneline contains=@mkdNonListItem,mkdListItem,@Spell
