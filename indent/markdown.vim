@@ -6,7 +6,7 @@ setlocal nolisp
 setlocal autoindent
 
 " Automatically insert bullets
-setlocal formatoptions+=r
+" setlocal formatoptions+=r
 " Do not automatically insert bullets when auto-wrapping with text-width
 setlocal formatoptions-=c
 " Accept various markers as bullets
